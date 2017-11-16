@@ -15,7 +15,7 @@ if(isset($_POST['submit'])) {
     $password = strip_tags(md5($_POST['password']));
     $sql = "SELECT * FROM login where email = '$email'";
 
-    $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking");
+    $db = mysqli_connect("localhost", "root", '', "ticketbooking");
 
     $query = mysqli_query($db, $sql);
 

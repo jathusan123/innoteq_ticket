@@ -13,7 +13,7 @@ if(isset($_POST['submit'])) {
         echo "password do not match";
     }
     else{
-        $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking") or die ("Failed to connect");
+        $db = mysqli_connect("localhost", "root", '', "ticketbooking") or die ("Failed to connect");
         $email = ($_POST['email']);
         $sql1 = "SELECT * FROM login WHERE email = '$email'";
         $result1 = mysqli_query($db, $sql1) or die(mysqli_error());
@@ -32,7 +32,7 @@ if(isset($_POST['submit'])) {
                 
                 $phone = ($_POST['phone']);
                 
-                $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking") or die ("Failed to connect");
+                $db = mysqli_connect("localhost", "root", '', "ticketbooking") or die ("Failed to connect");
                 $query = "INSERT INTO customer(name,email,ph_number) VALUES('$username','$email','$phone')";
                 $querylogin = "INSERT INTO login(email,password,role,status) VALUES('$email','$password','customer','active')";
 
@@ -199,26 +199,45 @@ if(isset($_POST['submit'])) {
     <form method="post" action="signup.php">
         <label><b>Name  </b></label>
         <div class="td">
-            <input type="text" name = "name" placeholder="Enter username">
+            <input type="text" required="" name = "name" placeholder="Enter username">
         </div>
         <label><b>Email  </b></label>
         <div class="td">
-            <input type="text" name="email" placeholder="Enter mail here">
+            <input type="text" required="" name="email" placeholder="Enter mail here">
+
         </div>
         <label><b>Phone Number  </b></label>
 
         <div class ='td'>
-            <input type="int" name="phone" placeholder="Enter ph no">
+            <input type="int" name="phone" required="" placeholder="Enter ph no" onkeyup="Check(event)" onkeydown="Check(event)" maxlength="10">
+            <script>
+                function Check(e) {
+                    var keyCode = (e.keyCode ? e.keyCode : e.which);
+                    if (keyCode <7 ||(keyCode >9 && keyCode <12)|| (keyCode>13&&keyCode < 46) || (keyCode > 58 &&  keyCode < 96 ) || (keyCode > 106)) {
+                        e.preventDefault();
+                    }
+                }
+                var input_field = document.getElementById('the_id');
+
+                input_field.addEventListener('change', function() {
+                    var v = parseFloat(this.value);
+                    if (isNaN(v)) {
+                        this.value = '';
+                    } else {
+                        this.value = v.toFixed(0);
+                    }
+                });
+            </script>
         </div>
         <label><b>Password  </b></label>
 
         <div class='td'></div>
-        <input type="password" name="password" placeholder="Password" id="txtNewPassword" />
+        <input type="password" name="password" required="" placeholder="Password" id="txtNewPassword" />
         </div>
         <label><b>Confirm Password </b></label>
 
         <div class="td">
-            <input type="password" name="cpassword" placeholder="Confirm Password" id="txtConfirmPassword" onkeyup="checkPasswordMatch();" />
+            <input type="password" name="cpassword" required="" placeholder="Confirm Password" id="txtConfirmPassword" onkeyup="checkPasswordMatch();" />
         </div>
         <div class="registrationFormAlert" id="divCheckPasswordMatch">
         </div>

@@ -106,11 +106,13 @@
                 <div class="select-boxes">
                 </div>
             </div>
-<form method="post" action="">
-
-    Enter Password:<input type="password" name="paw" >
-    <input type="submit" name="remove" value="Remove">
-</form>
+            <form method="post" action="">
+                Enter Password:<input type="password" name="paw" >
+                <input type="submit" name="remove" value="Remove">
+            </form>
+            <form method="post" action="">
+                <input type="submit" name="back" value="Back">
+            </form>
 </body>
 </html>
 <?php
@@ -118,9 +120,9 @@ session_start();
 $role= $_SESSION['role'];
 $email= $_SESSION['email'];
 if(isset($_POST['remove'])&& (!(empty($_POST['paw'])))) {
-    $password = ($_POST['paw']);
+    $password = md5($_POST['paw']);
 
-    $db = mysqli_connect("localhost", "root", '', "bus_booking") or die ("Failed to connect");
+    $db = mysqli_connect("localhost", "root", '', "ticketbooking") or die ("Failed to connect");
     $query = "select password from login where email='$email'";
     $result = mysqli_query($db, $query);
     if ($row = mysqli_fetch_array($result)) {
@@ -132,12 +134,13 @@ if(isset($_POST['remove'])&& (!(empty($_POST['paw'])))) {
 
     if ($password===$password1){
 
-        $db = mysqli_connect("localhost", "root", '', "bus_booking") or die ("Failed to connect");
+        $db = mysqli_connect("localhost", "root", '', "ticketbooking") or die ("Failed to connect");
         $query1 = "update login set status='deactive' where email='$email'";
         $result1 = mysqli_query($db,$query1);
         if($result1) {
             //echo $email;
             echo "Succesfully removed";
+            //echo $password1,$password;
             //header('Location: login.php');
         }
 

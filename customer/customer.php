@@ -11,7 +11,7 @@ session_start();
 if (isset($_SESSION['email'])){
     $email = $_SESSION['email'];
 
-    $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking") or die ("Failed to connect");
+    $db = mysqli_connect("localhost", "root", '', "ticketbooking") or die ("Failed to connect");
     $sql1 = "SELECT * FROM customer WHERE email = '$email'";
     $query=mysqli_query($db,$sql1);
     if ($query){
@@ -33,7 +33,7 @@ else {
 <html>
 
 <?php
-$db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking");
+$db = mysqli_connect("localhost", "root", '', "ticketbooking");
 ?>
 <html>
 <title>Demo|Lisenme</title>
@@ -52,7 +52,14 @@ $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking");
     <title>Welcome user</title>
 </head>
 
-<h3>Welcome <?php echo $username; ?>. </h3>
+<h3>Welcome <?php echo $username; ?>.</h3>
+<div class="w3-right">
+<form action="login.php">
+    <input type="submit" name="logout" value="logout">
+
+</form>
+</div>
+
 <style>
 
     h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
@@ -146,18 +153,20 @@ $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking");
         <input type="submit" name="BookedTicket" value="BookedTicket">
 
     </form>-->
-<form action="update.php">
-    <input type="submit" name="update" value="Update My Profile">
-
-</form>
+            <form action="update.php">
+                <input type="submit" name="update" value="Update My Profile">
+            </form>
 <!--<form action="index.php">
     <input type="submit" name="logout" value="Logout">
 </form>-->
-<form action="reomve.php">
-    <input type="submit" name="remove" value="Deactivate My Account">
+            <form action="reomve.php">
+                <input type="submit" name="remove" value="Deactivate My Account">
 
-</form>
+            </form>
+            <form action="changePW.php">
+                <input type="submit" name="pw" value="Change Account PassWord">
 
+            </form>
 
 
 </body>

@@ -4,7 +4,7 @@ $email= $_SESSION['email'];
 //if (isset($_POST['search'])) {
     //$id = $_POST['id'];
     //echo $email;
-    $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking") or die ("Failed to connect");
+    $db = mysqli_connect("localhost", "root", '', "ticketbooking") or die ("Failed to connect");
     $query = "select name,ph_number from customer where email='$email'";
     $result = mysqli_query($db, $query);
     if ($row = mysqli_fetch_array($result)) {
@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
     //$email=($_POST['email']);
     $phone=($_POST['ph_number']);
 
-    $db = mysqli_connect("localhost", "root", 'bd13011996', "ticketbooking") or die ("Failed to connect");
+    $db = mysqli_connect("localhost", "root", '', "ticketbooking") or die ("Failed to connect");
     $query = "update customer set name='$username',ph_number='$phone' where email='$email '";
     $result = mysqli_query($db,$query);
     if($result) {
